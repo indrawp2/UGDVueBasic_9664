@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>UNGUIDED VUE BASIC</title>
+        <script src="vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <div >
+                <div >
+                    <div >Tebak angka </div>
+                        <input type="teks"  v-model="tebakan" />
+                        <br>
+                        <button class="btn btn-primary btn-sm" @click="tebak">Tebak</button>
+                        <br>
+                        <p>Kesempatan : {{ kesempatan }}</p>
+                </div>
+            </div>
+            <div v-show="benar">
+                <p>Selamat!!! Anda Benar </p> 
+                <button class="btn btn-primary" @click="mainlagi" > Main Lagi </button>
+            </div>
+            <div  v-show="kalah">
+                <p>Maaf. Anda Kalah </p> 
+                <button class="btn btn-primary" @click="mainlagi" > Main Lagi </button>
+            </div>
+            <div  v-show="salah">
+                <p>Coba Lagi </p> 
+                <button class="btn btn-primary" @click="cobalagi" > Coba Lagi </button>
+            </div>
+            
+            <footer>
+                {{ dt.nama }} | {{ dt.npm }} | {{ dt.kelas }}
+            </footer>
+            </div>
+    </body>
+    <script>
+        new Vue({
+            el: "#app",
+            data: {
+                angka: 3,
+                tebakan:"",
+                kesempatan:3,
+                salah:0,
+                benar:0,
+                kalah:0,
+                dt :{
+                    nama:"Indra Wiranatha Palimbong",
+                    npm: 180709664,
+                    kelas: "PAW C",
+                },
+            },
+            methods: {
+               tebak(){
+                if(this.tebakan == this.angka){
+                    this.benar = 1;
+                }else {
+                    this.salah =1;
+                    this.kesempatan--;
+                    if(this.kesempatan==0){
+                            this.kalah=1;
+                            this.salah=0;
+                        }        
+                }              
+               },
+               cobalagi(){
+                    this.salah = 0;
+               },
+               mainlagi(){
+                this.angka= 3,
+                this.tebakan="",
+                this.kesempatan=3,
+                this.salah=0,
+                this.benar=0,
+                this.kalah=0
+               }
+            },
+     
+        });
+    </script>
+</html>
